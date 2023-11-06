@@ -1,0 +1,61 @@
+var icms = icms || {};
+
+icms.updownscroll = (function ($) {
+
+    //====================================================================//    
+    
+    this.onDocumentReady = function(){
+        
+        window.last_scroll_position = 0;
+        var show = false;
+        var scroll_to_top = $('#scroll_to_top');
+
+        scroll_to_top.on('click', function(){
+            if(scroll_to_top.hasClass('has_position')){ 
+                scroll_to_top.removeClass('has_position');    
+                $("html,body").stop().animate({ scrollTop: window.last_scroll_position }, 600 );
+                window.last_scroll_position = 0;
+                scroll_to_top.attr('title', 'Наверх');
+            }else{
+                scroll_to_top.addClass('has_position');
+                window.last_scroll_position = window.pageYOffset;
+                $("html,body").stop().animate({ scrollTop: 0 }, 600 );
+                scroll_to_top.attr('title', 'Вниз');
+            }
+            return false;
+        });
+
+        var last_position = 0;
+        var is_show = false;
+
+        $(window).scroll(function () {   
+
+            if(window.pageYOffset > 40){
+                if( !is_show ){
+                    scroll_to_top.removeClass('hidden'); 
+                    is_show = true;
+                }
+            }else{
+                if( is_show ){
+                    scroll_to_top.addClass('hidden');
+                    is_show = false;
+                }
+            }
+
+            if( last_position < window.pageYOffset){
+                if( scroll_to_top.hasClass('has_position') ){
+                    scroll_to_top.removeClass('has_position');
+                }
+            }
+            last_position = window.pageYOffset;
+        });
+
+    }
+      
+    //====================================================================//
+
+    return this; 
+    
+}).call(icms.updownscroll || {},jQuery);
+
+

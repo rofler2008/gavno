@@ -1,0 +1,49 @@
+/* 
+    Кнопка прокрутки страницы вверх/вниз
+
+    Created on : 24.07.2014, 19:55:19
+    Author     : Val
+*/
+
+.scroll_to_up {
+    position: fixed;
+    z-index: 999999;
+    bottom: 20px;
+    right: 30px;
+    display: block;
+}
+
+.scroll_to_up:after {
+    content: "";
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background-image: url("../images/updownscroll2.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    bottom: 20px;
+    right: 30px;
+    margin-top: -5px;
+    margin-left: -3px;
+}
+
+.scroll_to_up:hover:after {
+    background-position: 0 -40px;
+}
+
+.hidden {
+    display: none;
+}
+
+.has_position.hidden {
+    display: block !important;
+}
+
+.has_position.hidden:after {
+    background-position: -40px 0;
+}
+
+.has_position.hidden:hover:after {
+    background-position: -40px -40px;
+}
+
